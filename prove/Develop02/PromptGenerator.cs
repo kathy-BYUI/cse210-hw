@@ -1,5 +1,4 @@
 using System;
-
 public class PromptGenerator
 {
 
@@ -11,13 +10,13 @@ public class PromptGenerator
 
     public string _promt;
 
+    private Journal journal = new Journal();
 
-    public void DisplauUserOptions()
+
+    public void DisplayUserOptions()
     {
         Console.WriteLine("Welcome to the journal Program!");
         Console.WriteLine("Please select one of the following choices:");
-
-
         Console.WriteLine("1. Write");
         Console.WriteLine("2. Display");
         Console.WriteLine("3. Load");
@@ -26,48 +25,41 @@ public class PromptGenerator
     }
 
     public void ChooseOptions()
-    {   
-        
+    {
         do 
         {
-            DisplauUserOptions();
+            DisplayUserOptions();
             Console.WriteLine("What would you like to do?");
             string userOption = Console.ReadLine();
             _userOption = int.Parse(userOption);
-            Console.WriteLine($"The selected Option is {_userOption}");
-            if (_userOption==1)
+            switch (_userOption)
             {
-                
-                DisplayQuestions();
-                //He creado una instancia y un objeto para guardar los datos que debe tener una entrada
-                //En realidad, éste código debería estar en Entry.cs pero cuando lo intento alla en la función WriteEntry() no puedo obtener nada
-                //En la prueba de impresión de aquí sí obtengo los datos correctos
-                Entry entry1 = new Entry();
-                entry1._fecha = DateTime.Now.ToShortDateString();
-                entry1._response = Console.ReadLine();
-                entry1._prompt = _promt;
-                
-                Console.WriteLine("*******************************");
-                Console.WriteLine($"fechaaaaaaaaa {entry1._fecha}");
-                Console.WriteLine($"prompt {entry1._prompt}");
-                Console.WriteLine($"response {entry1._response}");
-                Console.WriteLine("*******************************"); 
-                
-                entry1.WriteEntry();
-                
-                
+                case 1: { 
+                    _promt = GetQuestions();
+                    Console.WriteLine(_promt);
+                    Entry entry1 = new Entry();
+                    entry1._fecha = DateTime.Now.ToShortDateString();
+                    entry1._prompt = _promt;
+                    entry1._response = Console.ReadLine();                    
+                    journal.AddNewEntry(entry1);
+                } break; 
+                case 2: journal.DisplayJourney(); break;  
+                case 3: {
+                    Console.WriteLine("What is the name of the file that you can open?");
+                    journal._fileName  = Console.ReadLine();  
+                    journal.LoadFromFile();
+                    } break;              
+                case 4: {
+                    Console.WriteLine("Write a name for your file:");
+                    journal._fileName  = Console.ReadLine();  
+                    journal.SaveToFile();
+                    }; break;                
             }
-            if (_userOption==2)
-            {
-                
-                Entry entry = new Entry();
-                entry.DisplayEntry();
-            }
+            
         } while (_userOption != 5);     
         
     }
-
-    public void DisplayQuestions()
+    public String GetQuestions()
     
     {
         Random randomNumber = new Random();
@@ -92,10 +84,6 @@ public class PromptGenerator
         {
             _promt = "If I had one thing I could do over today, what would it be?";            
         }
-        Console.WriteLine(_promt);
+        return _promt;
     }
-
-
-
-
 }
