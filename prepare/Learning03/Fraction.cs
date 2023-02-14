@@ -1,6 +1,7 @@
 public class Fraction 
 
 {
+    //Variables
     private int _top;
     private int _bottom;
 
@@ -34,6 +35,8 @@ public class Fraction
     {
         _bottom = bottom;
     }
+
+    //Methods
     public string GetFractionString(){
         return GetTop() + "/" + GetBottom();
     }
