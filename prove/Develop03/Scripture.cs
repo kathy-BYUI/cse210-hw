@@ -2,33 +2,28 @@ class Scripture
 {
     //Attributes
     private Reference _scriptureReference = new Reference();
-    private List<Word> _scriptureword = new List<Word>();
+    private List<Word> _scriptureWord = new List<Word>();
 
     //Constructors
     public Scripture(){
 
     }
 	
-    public Scripture(string referenceword, string scriptureword)
+    public Scripture(string referenceWord, string scriptureWord)
     {
-        _scriptureReference = new Reference(referenceword);
-        StringToWords(scriptureword);
+        _scriptureReference = new Reference(referenceWord);
+        StringToWords(scriptureWord);
     }  
 
     //Methods
 	
-	private void StringToWords(string scriptureword)
+	private void StringToWords(string scriptureWord)
     {
-        List<string> splitScriptureword = scriptureword.Replace(Environment.NewLine," ").Split(" ").ToList<string>();
+        List<string> splitScriptureWord = scriptureWord.Replace(Environment.NewLine," ").Split(" ").ToList<string>();
         {
-            _scriptureword = new List<Word>();
-            splitScriptureword.ForEach((string newWordword) => {_scriptureword.Add(new Word(newWordword));});
+            _scriptureWord = new List<Word>();
+            splitScriptureWord.ForEach((string newWordword) => {_scriptureWord.Add(new Word(newWordword));});
         }
-    }
-
-    public bool NextTurn()
-    {
-        return HideWords(2);
     }
 
 
@@ -46,7 +41,7 @@ class Scripture
             while(visibleWordsList.Count > 0 && wordHideMax > 0)
             {
                 int hideWordIndex = new Random().Next(0, visibleWordsList.Count);
-                _scriptureword[visibleWordsList[hideWordIndex]].SetHidden(true);
+                _scriptureWord[visibleWordsList[hideWordIndex]].SetHidden(true);
                 visibleWordsList.RemoveAt(hideWordIndex);
                 wordHideMax--;
                 wordHidden = true;
@@ -62,9 +57,9 @@ class Scripture
     public int RandomHideMax(int newRemoveCount)
     {
         newRemoveCount = (-newRemoveCount) + 1;
-        if(newRemoveCount > _scriptureword.Count + 1)
+        if(newRemoveCount > _scriptureWord.Count + 1)
         {
-            newRemoveCount = _scriptureword.Count + 1;
+            newRemoveCount = _scriptureWord.Count + 1;
         }
         return newRemoveCount;
     }
@@ -74,9 +69,9 @@ class Scripture
         if(IsAnyVisible())
         {
             List<int> returnList = new List<int>();
-            for(int i = 0; i < _scriptureword.Count; i++)
+            for(int i = 0; i < _scriptureWord.Count; i++)
             {
-                if(!_scriptureword[i].GetHidden())
+                if(!_scriptureWord[i].GetHidden())
                 {
                     returnList.Add(i);
                 }
@@ -88,7 +83,7 @@ class Scripture
     }
     private bool IsAnyVisible(){
 
-        return _scriptureword.Exists((Word currentWord)=>{return currentWord.GetHidden()==false;});
+        return _scriptureWord.Exists((Word currentWord)=>{return currentWord.GetHidden()==false;});
     }
     public void DisplayFull()
     {
@@ -98,20 +93,20 @@ class Scripture
     private string WordListToString()
     {
         string returnString = "";
-        for(int i=0;i<_scriptureword.Count;i++)
+        for(int i=0;i<_scriptureWord.Count;i++)
         {
             if(i != 0)
             {
                 returnString+=" ";
             }
-            returnString += _scriptureword[i].GetDisplayString();
+            returnString += _scriptureWord[i].GetDisplayString();
         }
         return returnString;
     }
 
     public void Reset()
     {
-        _scriptureword.FindAll((Word wordItem) => {return wordItem.GetHidden();}).ForEach((Word HiddenWordItem)=>{HiddenWordItem.SetHidden(false);});
+        _scriptureWord.FindAll((Word wordItem) => {return wordItem.GetHidden();}).ForEach((Word HiddenWordItem)=>{HiddenWordItem.SetHidden(false);});
  
     }    
 }
