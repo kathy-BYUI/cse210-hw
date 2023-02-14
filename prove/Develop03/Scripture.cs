@@ -107,5 +107,11 @@ class Scripture
             returnString += _scriptureword[i].GetDisplayString();
         }
         return returnString;
+    }
+
+    public void Reset()
+    {
+        _scriptureword.FindAll((Word wordItem) => {return wordItem.GetHidden();}).ForEach((Word HiddenWordItem)=>{HiddenWordItem.SetHidden(false);});
+ 
     }    
 }

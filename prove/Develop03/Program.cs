@@ -3,24 +3,28 @@ class Program
     public static Scripture myScripture = new Scripture("2 Peter 1:5-7","And beside this, giving all adiligence, add to your faith virtue; and to virtue knowledge; And to knowledge temperance; and to temperance patience; and to patience godliness; And to godliness brotherly kindness; and to brotherly kindness charity. For if these things be in you, and abound, they make you that ye shall neither be barren nor unfruitful in the knowledge of our Lord Jesus Christ.");
 	
     static void Main(string[] args)
-    {
+    {        
         Display();
     }
 
-    static void Display()
-    {
+    static void Display()    
+    {        
         int hideCount = 2;
         while(1 == 1)
         {
             Console.Clear();            
             myScripture.DisplayFull();
             Console.WriteLine();
-            string userInput = GetInputLine("Press enter to continue or type 'quit' to finish:");
+            string userInput = GetInputLine("Press enter to continue, type 'quit' to finish or 'reset' for see all the scripture:");
 
             if(userInput == "quit")
             {
                 break;
             }            
+            else if(userInput == "reset")
+            {
+                myScripture.Reset();
+            }
             else
             {
                 try
@@ -68,5 +72,4 @@ class Program
         }
         return userInput;
     }   
-
 }
