@@ -1,0 +1,4 @@
+14
+SimpleGoal | comer sano cada dia de la semana | comer sano | 250 | False
+EternalGoal | leer mis escrituras cada día | leer | 600
+ChecklistGoal | dormir a las 10 pm por 1 semana | dormir temprano | 7 | 1000 | 7 | 2

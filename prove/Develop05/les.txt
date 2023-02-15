@@ -1,0 +1,3 @@
+500
+SimpleGoal | Comer saludablemente toda la semana | comer sano | 500 | True
+EternalGoal | leer las escrituras 10 min x dia | ler diario | 500
